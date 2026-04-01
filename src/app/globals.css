@@ -1,39 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+  --font-display: var(--font-dm-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --bg: #080d1a;
+  --surface: #0d1628;
+  --surface-2: #111d35;
+  --border: rgba(201, 168, 76, 0.14);
+  --border-strong: rgba(201, 168, 76, 0.38);
+  --gold: #c9a84c;
+  --gold-bright: #e8c56a;
+  --cream: #f0ebe0;
+  --muted: #7a8799;
+  --subtle: #3a4455;
+  --danger: #e05c5c;
+  --success: #4caf82;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Ambient dot grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(201, 168, 76, 0.045) 1px, transparent 0);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top glow */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 50vh;
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.055) 0%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 @layer components {
+  .card {
+    position: relative;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(148deg, #0d1628 0%, #090e1c 100%);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.25), transparent);
+    pointer-events: none;
+  }
+
   .input {
-    @apply w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm outline-none
-      placeholder:text-zinc-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500
-      dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100;
+    @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition-all duration-150;
+    background: rgba(8, 13, 26, 0.8);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    color: var(--cream);
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+  }
+
+  .input::placeholder {
+    color: var(--subtle);
+  }
+
+  .input:focus {
+    border-color: rgba(201, 168, 76, 0.55);
+    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+  }
+
+  /* Remove number input arrows */
+  .input[type='number']::-webkit-inner-spin-button,
+  .input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .input[type='number'] {
+    -moz-appearance: textfield;
   }
 
   .btn-primary {
-    @apply rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors
-      hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300;
+    @apply relative rounded-xl px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-150;
+    background: linear-gradient(135deg, #c9a84c 0%, #e8c56a 100%);
+    color: #07090f;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #d4b55e 0%, #f2d47a 100%);
+    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.28), 0 1px 4px rgba(201, 168, 76, 0.15);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
   }
 }

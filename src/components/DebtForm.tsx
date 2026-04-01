@@ -6,6 +6,13 @@ import type { Debt } from '@/src/types/debt';
 
 const empty = { name: '', balance: '', interestRate: '', minimumPayment: '' };
 
+const FIELDS = [
+  { key: 'name' as const,           label: 'Debt name',     placeholder: 'e.g. Chase Sapphire', type: 'text'   },
+  { key: 'balance' as const,        label: 'Balance',        placeholder: '0.00',                type: 'number', prefix: '$' },
+  { key: 'interestRate' as const,   label: 'APR',            placeholder: '0.00',                type: 'number', suffix: '%' },
+  { key: 'minimumPayment' as const, label: 'Min. payment',   placeholder: '0.00',                type: 'number', prefix: '$' },
+];
+
 export default function DebtForm() {
   const { addDebt } = useDebts();
   const [fields, setFields] = useState(empty);
@@ -28,50 +35,62 @@ export default function DebtForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Add a debt</h2>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <input
-          className="input"
-          placeholder="Name"
-          value={fields.name}
-          onChange={set('name')}
-          required
-        />
-        <input
-          className="input"
-          placeholder="Balance ($)"
-          type="number"
-          min="0"
-          step="0.01"
-          value={fields.balance}
-          onChange={set('balance')}
-          required
-        />
-        <input
-          className="input"
-          placeholder="APR (%)"
-          type="number"
-          min="0"
-          step="0.01"
-          value={fields.interestRate}
-          onChange={set('interestRate')}
-          required
-        />
-        <input
-          className="input"
-          placeholder="Min. payment ($)"
-          type="number"
-          min="0"
-          step="0.01"
-          value={fields.minimumPayment}
-          onChange={set('minimumPayment')}
-          required
-        />
+    <div className="card">
+      {/* Section header with decorative lines */}
+      <div className="mb-5 flex items-center gap-3">
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(201,168,76,0.35) 0%, transparent 100%)' }} />
+        <span className="section-label">Add a Debt</span>
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(270deg, rgba(201,168,76,0.35) 0%, transparent 100%)' }} />
       </div>
-      <button type="submit" className="btn-primary self-end">
-        Add Debt
-      </button>
-    </form>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {FIELDS.map(({ key, label, placeholder, type, prefix, suffix }) => (
+            <div key={key} className="flex flex-col gap-1.5">
+              <label className="text-xs font-medium tracking-wide" style={{ color: '#7a8799' }}>
+                {label}
+              </label>
+              <div className="relative">
+                {prefix && (
+                  <span
+                    className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"
+                    style={{ color: '#3a4455', fontFamily: 'var(--font-dm-mono)' }}
+                  >
+                    {prefix}
+                  </span>
+                )}
+                <input
+                  className="input"
+                  style={{
+                    paddingLeft: prefix ? '1.875rem' : undefined,
+                    paddingRight: suffix ? '2rem' : undefined,
+                    fontFamily: type === 'number' ? 'var(--font-dm-mono)' : undefined,
+                  }}
+                  placeholder={placeholder}
+                  type={type}
+                  min={type === 'number' ? '0' : undefined}
+                  step={type === 'number' ? '0.01' : undefined}
+                  value={fields[key]}
+                  onChange={set(key)}
+                  required
+                />
+                {suffix && (
+                  <span
+                    className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm"
+                    style={{ color: '#3a4455', fontFamily: 'var(--font-dm-mono)' }}
+                  >
+                    {suffix}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <button type="submit" className="btn-primary self-end mt-1">
+          Add Debt
+        </button>
+      </form>
+    </div>
   );
 }

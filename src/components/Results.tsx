@@ -18,7 +18,6 @@ export default function Results() {
   const months = result.totalMonths % 12;
   const timeLabel = [years > 0 && `${years}y`, months > 0 && `${months}mo`].filter(Boolean).join(' ');
 
-  // Build per-debt payoff month for summary table.
   const payoffMonthByDebt = new Map<string, number>();
   for (const snap of result.schedule) {
     if (snap.balance === 0 && !payoffMonthByDebt.has(snap.debtId)) {
@@ -27,46 +26,107 @@ export default function Results() {
   }
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Results</h2>
+    <div className="card">
+      <span className="section-label">Projection</span>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        <Stat label="Debt-free in" value={timeLabel || '—'} />
-        <Stat label="Total interest" value={`$${result.totalInterestPaid.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} />
-        <Stat label="Total months" value={String(result.totalMonths)} />
+      {/* Key stats */}
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        <StatCard
+          label="Debt-free"
+          value={timeLabel || '—'}
+          highlight
+        />
+        <StatCard
+          label="Interest"
+          value={`$${result.totalInterestPaid.toLocaleString(undefined, { maximumFractionDigits: 0 })}`}
+        />
+        <StatCard
+          label="Months"
+          value={String(result.totalMonths)}
+        />
       </div>
 
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-zinc-200 text-left text-xs text-zinc-500 dark:border-zinc-700">
-            <th className="pb-2 font-medium">Debt</th>
-            <th className="pb-2 font-medium">Paid off</th>
-          </tr>
-        </thead>
-        <tbody>
-          {debts.map((debt) => {
+      {/* Payoff order */}
+      <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(201,168,76,0.1)' }}>
+        <p className="mb-3 text-xs tracking-[0.15em] uppercase" style={{ color: '#2d3748' }}>
+          Payoff order
+        </p>
+
+        <div className="flex flex-col gap-1.5">
+          {debts.map((debt, i) => {
             const mo = payoffMonthByDebt.get(debt.id) ?? result.totalMonths;
             const y = Math.floor(mo / 12);
             const m = mo % 12;
             const label = [y > 0 && `${y}y`, m > 0 && `${m}mo`].filter(Boolean).join(' ') || '< 1mo';
+
             return (
-              <tr key={debt.id} className="border-b border-zinc-100 dark:border-zinc-800">
-                <td className="py-2">{debt.name}</td>
-                <td className="py-2 text-zinc-500">Month {mo} ({label})</td>
-              </tr>
+              <div
+                key={debt.id}
+                className="flex items-center gap-3 rounded-xl px-3 py-2.5"
+                style={{
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid rgba(201,168,76,0.06)',
+                }}
+              >
+                {/* Rank badge */}
+                <span
+                  className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-medium"
+                  style={{
+                    background: 'rgba(201,168,76,0.12)',
+                    color: '#c9a84c',
+                    fontFamily: 'var(--font-dm-mono)',
+                  }}
+                >
+                  {i + 1}
+                </span>
+
+                {/* Debt name */}
+                <span className="flex-1 truncate text-sm" style={{ color: '#f0ebe0' }}>
+                  {debt.name}
+                </span>
+
+                {/* Timing */}
+                <div className="text-right shrink-0">
+                  <p
+                    className="text-xs font-medium"
+                    style={{ color: '#7a8799', fontFamily: 'var(--font-dm-mono)' }}
+                  >
+                    {label}
+                  </p>
+                  <p
+                    className="text-xs"
+                    style={{ color: '#2d3748', fontFamily: 'var(--font-dm-mono)' }}
+                  >
+                    mo. {mo}
+                  </p>
+                </div>
+              </div>
             );
           })}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
-    <div className="flex flex-col gap-1">
-      <p className="text-xs text-zinc-500">{label}</p>
-      <p className="text-xl font-semibold">{value}</p>
+    <div
+      className="flex flex-col gap-1 rounded-xl p-3"
+      style={{ background: highlight ? 'rgba(201,168,76,0.06)' : 'rgba(255,255,255,0.02)' }}
+    >
+      <p className="text-xs uppercase tracking-[0.12em]" style={{ color: '#3a4455' }}>
+        {label}
+      </p>
+      <p
+        className="text-xl leading-tight tracking-tight"
+        style={{
+          fontFamily: 'var(--font-dm-serif)',
+          color: highlight ? '#e8c56a' : '#f0ebe0',
+        }}
+      >
+        {value}
+      </p>
     </div>
   );
 }
