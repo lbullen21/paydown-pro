@@ -1,0 +1,60 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - heading "Paydown Pro" [level=1] [ref=e6]
+          - paragraph [ref=e7]: Debt Payoff Simulator
+        - generic [ref=e10]: Strategy active
+    - main [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - generic [ref=e17]: Add a Debt
+            - generic [ref=e19]:
+              - generic [ref=e20]:
+                - generic [ref=e21]:
+                  - generic [ref=e22]: Debt name
+                  - textbox "e.g. Chase Sapphire" [ref=e24]
+                - generic [ref=e25]:
+                  - generic [ref=e26]: Balance
+                  - generic [ref=e27]:
+                    - generic: $
+                    - spinbutton [ref=e28]
+                - generic [ref=e29]:
+                  - generic [ref=e30]: APR
+                  - generic [ref=e31]:
+                    - spinbutton [ref=e32]
+                    - generic: "%"
+                - generic [ref=e33]:
+                  - generic [ref=e34]: Min. payment
+                  - generic [ref=e35]:
+                    - generic: $
+                    - spinbutton [ref=e36]
+              - button "Add Debt" [ref=e37]
+          - generic [ref=e38]:
+            - generic [ref=e39]: ◎
+            - paragraph [ref=e40]: No debts added yet
+            - paragraph [ref=e41]: Fill in the form above to get started.
+        - generic [ref=e43]:
+          - text: Strategy
+          - generic [ref=e44]:
+            - button "▲ Avalanche Highest APR first — minimises total interest paid ✓" [ref=e45]:
+              - generic [ref=e46]: ▲
+              - generic [ref=e47]:
+                - paragraph [ref=e48]: Avalanche
+                - paragraph [ref=e49]: Highest APR first — minimises total interest paid
+              - generic [ref=e50]: ✓
+            - button "● Snowball Smallest balance first — builds repayment momentum" [ref=e51]:
+              - generic [ref=e52]: ●
+              - generic [ref=e53]:
+                - paragraph [ref=e54]: Snowball
+                - paragraph [ref=e55]: Smallest balance first — builds repayment momentum
+          - generic [ref=e57]:
+            - generic [ref=e58]: Extra monthly payment
+            - generic [ref=e59]:
+              - generic: $
+              - spinbutton "Extra monthly payment $" [ref=e60]: "0"
+    - contentinfo [ref=e61]: Paydown Pro · All figures are estimates for planning purposes only
+  - button "Open Next.js Dev Tools" [ref=e67] [cursor=pointer]:
+    - img [ref=e68]

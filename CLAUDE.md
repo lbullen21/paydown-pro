@@ -29,9 +29,15 @@ A debt payoff simulator. Users add debts, choose a payoff strategy (avalanche or
 
 **Import alias:** `@/` maps to the project root.
 
-**Fonts:** Geist and Geist Mono loaded via `next/font` in `app/layout.tsx`, exposed as CSS variables (`--font-geist-sans`, `--font-geist-mono`).
+**Fonts:** DM Serif Display, DM Sans, and DM Mono loaded via `next/font/google` in `app/layout.tsx`, exposed as CSS variables (`--font-dm-serif`, `--font-dm-sans`, `--font-dm-mono`). Tailwind theme aliases: `--font-display`, `--font-sans`, `--font-mono`.
 
-**Global CSS classes:** `.input` and `.btn-primary` are defined as Tailwind `@layer components` in `app/globals.css` — use these on form elements and buttons.
+**Design tokens:** CSS custom properties on `:root` in `app/globals.css` — `--bg`, `--surface`, `--surface-2`, `--border`, `--border-strong`, `--gold`, `--gold-bright`, `--cream`, `--muted`, `--subtle`, `--danger`, `--success`. Use these instead of raw colour values.
+
+**Global CSS classes:** Defined as Tailwind `@layer components` in `app/globals.css`:
+- `.card` — dark gradient card with gold top-edge shimmer
+- `.input` — styled text/number input
+- `.btn-primary` — gold gradient submit button
+- `.section-label` — small uppercase gold label
 
 ## Feature structure
 

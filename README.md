@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Paydown Pro
+
+![Paydown Pro screenshot](public/screenshot.png)
+
+A debt payoff simulator built with Next.js. Add your debts, pick a strategy (avalanche or snowball), set an extra monthly payment, and get a month-by-month payoff schedule.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run lint     # Run ESLint
+npm run start    # Start production server
+```
 
-## Learn More
+## Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 16.2.1** App Router
+- **React 19**
+- **TypeScript** (strict mode)
+- **Tailwind CSS v4** (via `@tailwindcss/postcss` — no `tailwind.config.*` file)
+- **Fonts:** DM Serif Display, DM Sans, DM Mono via `next/font/google`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    layout.tsx       # Root layout — fonts, global styles
+    page.tsx         # Home page (Server Component)
+    globals.css      # Tailwind + design tokens + component classes
+  components/
+    DebtForm.tsx     # Add a debt
+    DebtList.tsx     # List debts with remove buttons
+    StrategyToggle.tsx  # Avalanche/snowball toggle + extra payment
+    Results.tsx      # Month-by-month payoff schedule
+  store/
+    debts.tsx        # DebtProvider context + useDebts() hook
+  lib/
+    payoff.ts        # Pure calculatePayoff() — no React
+  types/
+    debt.ts          # Shared TypeScript types
+```

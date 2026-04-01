@@ -9,6 +9,7 @@ export default function Results() {
 
   const result = useMemo(
     () => calculatePayoff(debts, extraPayment, strategy),
+    
     [debts, strategy, extraPayment],
   );
 
