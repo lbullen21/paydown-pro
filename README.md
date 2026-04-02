@@ -1,6 +1,6 @@
 # Paydown Pro
 
-![Paydown Pro screenshot](public/screenshot.png)
+![Paydown Pro screenshot](public/screenshot2.png)
 
 A debt payoff simulator built with Next.js. Add your debts, pick a strategy (avalanche or snowball), set an extra monthly payment, and get a month-by-month payoff schedule.
 
