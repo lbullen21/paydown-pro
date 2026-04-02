@@ -7,32 +7,32 @@ import Results from '@/src/components/Results';
 export default function Home() {
   return (
     <DebtProvider>
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 flex flex-col min-h-screen" suppressHydrationWarning>
 
         {/* Header */}
-        <header style={{ borderBottom: '1px solid rgba(201, 168, 76, 0.1)' }} className="px-6 py-5 lg:px-10">
+        <header style={{ borderBottom: '1px solid var(--border)' }} className="px-6 py-5 lg:px-10">
           <div className="mx-auto flex max-w-6xl items-end justify-between">
             <div>
               <h1
-                className="text-4xl tracking-tight leading-none"
-                style={{ fontFamily: 'var(--font-dm-serif)', color: '#f0ebe0' }}
+                className="text-4xl leading-none"
+                style={{ fontFamily: 'var(--font-geist)', fontWeight: 300, color: 'var(--text)', letterSpacing: '-0.01em' }}
               >
-                Paydown <span style={{ color: '#c9a84c' }}>Pro</span>
+                Paydown <span style={{ color: 'var(--accent)' }}>Pro</span>
               </h1>
               <p
                 className="mt-1 text-xs tracking-[0.18em] uppercase"
-                style={{ color: '#3a4455' }}
+                style={{ color: 'var(--text-subtle)' }}
               >
                 Debt Payoff Simulator
               </p>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 text-xs" style={{ color: '#3a4455' }}>
+            <div className="hidden sm:flex items-center gap-2 text-xs" style={{ color: 'var(--text-subtle)' }}>
               <span
                 className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: '#4caf82', boxShadow: '0 0 6px rgba(76,175,130,0.6)' }}
+                style={{ backgroundColor: 'var(--success)', boxShadow: '0 0 6px rgba(var(--accent-rgb),0.6)' }}
               />
-              <span style={{ color: '#7a8799' }}>Strategy active</span>
+              <span style={{ color: 'var(--text-muted)' }}>Strategy active</span>
             </div>
           </div>
         </header>
@@ -59,7 +59,7 @@ export default function Home() {
         {/* Footer */}
         <footer
           className="px-6 py-4 text-center text-xs"
-          style={{ borderTop: '1px solid rgba(201, 168, 76, 0.07)', color: '#2d3748' }}
+          style={{ borderTop: '1px solid var(--border)', color: 'var(--text-subtle)' }}
         >
           Paydown Pro · All figures are estimates for planning purposes only
         </footer>

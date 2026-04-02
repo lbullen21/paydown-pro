@@ -35,16 +35,16 @@ export default function StrategyToggle() {
               onClick={() => setStrategy(opt.value)}
               className="flex items-start gap-3.5 rounded-xl px-4 py-3.5 text-left transition-all duration-150"
               style={{
-                background: active ? 'rgba(201,168,76,0.07)' : 'rgba(255,255,255,0.02)',
-                border: active ? '1px solid rgba(201,168,76,0.38)' : '1px solid rgba(201,168,76,0.08)',
+                background: active ? 'rgba(var(--accent-rgb), 0.07)' : 'rgba(var(--accent-rgb), 0.02)',
+                border: active ? '1px solid var(--border-strong)' : '1px solid var(--border)',
               }}
             >
               {/* Icon */}
               <span
                 className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-xs"
                 style={{
-                  background: active ? 'rgba(201,168,76,0.18)' : 'rgba(255,255,255,0.04)',
-                  color: active ? '#c9a84c' : '#3a4455',
+                  background: active ? 'rgba(var(--accent-rgb), 0.18)' : 'rgba(var(--accent-rgb), 0.06)',
+                  color: active ? 'var(--accent)' : 'var(--text-subtle)',
                 }}
               >
                 {opt.glyph}
@@ -52,17 +52,17 @@ export default function StrategyToggle() {
 
               {/* Text */}
               <div className="flex-1">
-                <p className="text-sm font-medium" style={{ color: active ? '#e8c56a' : '#7a8799' }}>
+                <p className="text-sm font-medium" style={{ color: active ? 'var(--accent-bright)' : 'var(--text-muted)' }}>
                   {opt.label}
                 </p>
-                <p className="mt-0.5 text-xs leading-relaxed" style={{ color: active ? '#8a7040' : '#2d3748' }}>
+                <p className="mt-0.5 text-xs leading-relaxed" style={{ color: active ? 'var(--accent)' : 'var(--text-subtle)' }}>
                   {opt.description}
                 </p>
               </div>
 
               {/* Active indicator */}
               {active && (
-                <span className="shrink-0 text-xs font-semibold" style={{ color: '#c9a84c' }}>
+                <span className="shrink-0 text-xs font-semibold" style={{ color: 'var(--accent)' }}>
                   ✓
                 </span>
               )}
@@ -72,15 +72,15 @@ export default function StrategyToggle() {
       </div>
 
       {/* Extra payment */}
-      <div className="mt-4 pt-4" style={{ borderTop: '1px solid rgba(201,168,76,0.1)' }}>
+      <div className="mt-4 pt-4" style={{ borderTop: '1px solid var(--border)' }}>
         <label className="flex flex-col gap-2">
-          <span className="text-xs font-medium tracking-wide" style={{ color: '#7a8799' }}>
+          <span className="text-xs font-medium tracking-wide" style={{ color: 'var(--text-muted)' }}>
             Extra monthly payment
           </span>
           <div className="relative">
             <span
               className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"
-              style={{ color: '#3a4455', fontFamily: 'var(--font-dm-mono)' }}
+              style={{ color: 'var(--text-subtle)' }}
             >
               $
             </span>
@@ -91,7 +91,7 @@ export default function StrategyToggle() {
               value={extraPayment}
               onChange={(e) => setExtraPayment(Math.max(0, parseFloat(e.target.value) || 0))}
               className="input w-full"
-              style={{ paddingLeft: '1.875rem', fontFamily: 'var(--font-dm-mono)' }}
+              style={{ paddingLeft: '1.875rem' }}
             />
           </div>
         </label>

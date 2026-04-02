@@ -29,15 +29,24 @@ A debt payoff simulator. Users add debts, choose a payoff strategy (avalanche or
 
 **Import alias:** `@/` maps to the project root.
 
-**Fonts:** DM Serif Display, DM Sans, and DM Mono loaded via `next/font/google` in `app/layout.tsx`, exposed as CSS variables (`--font-dm-serif`, `--font-dm-sans`, `--font-dm-mono`). Tailwind theme aliases: `--font-display`, `--font-sans`, `--font-mono`.
+**Fonts:** Inter (all UI, weights 300–700) and Geist (weight 300, header only) loaded via `next/font/google` in `app/layout.tsx`, exposed as `--font-inter` and `--font-geist`. Tailwind theme aliases: `--font-sans`, `--font-mono` → Inter; `--font-display` → Geist.
 
-**Design tokens:** CSS custom properties on `:root` in `app/globals.css` — `--bg`, `--surface`, `--surface-2`, `--border`, `--border-strong`, `--gold`, `--gold-bright`, `--cream`, `--muted`, `--subtle`, `--danger`, `--success`. Use these instead of raw colour values.
+**Theme:** Slate + Emerald dark-only palette. Always dark regardless of user OS setting.
+
+**Design tokens:** All defined as CSS custom properties in `app/globals.css`. Never use raw hex values in components — always use a token:
+- `--bg`, `--surface`, `--surface-2` — background layers
+- `--border`, `--border-strong` — border colours
+- `--accent`, `--accent-bright`, `--accent-rgb` — emerald accent (use `rgba(var(--accent-rgb), 0.X)` for opacity variants)
+- `--text`, `--text-muted`, `--text-subtle` — text hierarchy
+- `--danger`, `--danger-rgb` — destructive/error states
+- `--success` — positive states
+- `--card-shadow` — box shadow (none in dark, subtle in light)
 
 **Global CSS classes:** Defined as Tailwind `@layer components` in `app/globals.css`:
-- `.card` — dark gradient card with gold top-edge shimmer
+- `.card` — surface card with gradient background and emerald top-edge shimmer
 - `.input` — styled text/number input
-- `.btn-primary` — gold gradient submit button
-- `.section-label` — small uppercase gold label
+- `.btn-primary` — emerald gradient submit button
+- `.section-label` — small uppercase emerald label
 
 ## Feature structure
 

@@ -1,30 +1,34 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-dm-sans);
-  --font-mono: var(--font-dm-mono);
-  --font-display: var(--font-dm-serif);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+  --font-display: var(--font-geist);
 }
 
+/* ── Dark mode tokens (default) ── */
 :root {
-  --bg: #080d1a;
-  --surface: #0d1628;
-  --surface-2: #111d35;
-  --border: rgba(201, 168, 76, 0.14);
-  --border-strong: rgba(201, 168, 76, 0.38);
-  --gold: #c9a84c;
-  --gold-bright: #e8c56a;
-  --cream: #f0ebe0;
-  --muted: #7a8799;
-  --subtle: #3a4455;
-  --danger: #e05c5c;
-  --success: #4caf82;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #273549;
+  --border: rgba(16, 185, 129, 0.14);
+  --border-strong: rgba(16, 185, 129, 0.38);
+  --accent: #10b981;
+  --accent-bright: #34d399;
+  --accent-rgb: 16, 185, 129;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #475569;
+  --danger: #f87171;
+  --danger-rgb: 248, 113, 113;
+  --success: #34d399;
 }
+
 
 body {
   background-color: var(--bg);
-  color: var(--cream);
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
   min-height: 100vh;
 }
 
@@ -33,7 +37,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(201, 168, 76, 0.045) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(var(--accent-rgb), 0.04) 1px, transparent 0);
   background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
@@ -48,7 +52,7 @@ body::after {
   transform: translateX(-50%);
   width: 70vw;
   height: 50vh;
-  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.055) 0%, transparent 72%);
+  background: radial-gradient(ellipse, rgba(var(--accent-rgb), 0.05) 0%, transparent 72%);
   pointer-events: none;
   z-index: 0;
 }
@@ -58,8 +62,9 @@ body::after {
     position: relative;
     border-radius: 1rem;
     padding: 1.5rem;
-    background: linear-gradient(148deg, #0d1628 0%, #090e1c 100%);
+    background: linear-gradient(148deg, var(--surface) 0%, var(--bg) 100%);
     border: 1px solid var(--border);
+  
     overflow: hidden;
   }
 
@@ -70,25 +75,25 @@ body::after {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.25), transparent);
     pointer-events: none;
   }
 
   .input {
     @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition-all duration-150;
-    background: rgba(8, 13, 26, 0.8);
-    border: 1px solid rgba(201, 168, 76, 0.18);
-    color: var(--cream);
-    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--font-inter), system-ui, sans-serif;
   }
 
   .input::placeholder {
-    color: var(--subtle);
+    color: var(--text-subtle);
   }
 
   .input:focus {
-    border-color: rgba(201, 168, 76, 0.55);
-    box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.08);
   }
 
   /* Remove number input arrows */
@@ -103,26 +108,27 @@ body::after {
 
   .btn-primary {
     @apply relative rounded-xl px-5 py-2.5 text-sm font-semibold tracking-wide transition-all duration-150;
-    background: linear-gradient(135deg, #c9a84c 0%, #e8c56a 100%);
-    color: #07090f;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
+    color: #f0fdf4;
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #d4b55e 0%, #f2d47a 100%);
-    box-shadow: 0 4px 20px rgba(201, 168, 76, 0.28), 0 1px 4px rgba(201, 168, 76, 0.15);
+    filter: brightness(1.08);
+    box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.28), 0 1px 4px rgba(var(--accent-rgb), 0.15);
     transform: translateY(-1px);
   }
 
   .btn-primary:active {
     transform: translateY(0);
     box-shadow: none;
+    filter: none;
   }
 
   .section-label {
     font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--accent);
   }
 }

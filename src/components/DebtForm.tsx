@@ -38,23 +38,23 @@ export default function DebtForm() {
     <div className="card">
       {/* Section header with decorative lines */}
       <div className="mb-5 flex items-center gap-3">
-        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(201,168,76,0.35) 0%, transparent 100%)' }} />
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(var(--accent-rgb),0.35) 0%, transparent 100%)' }} />
         <span className="section-label">Add a Debt</span>
-        <div className="h-px flex-1" style={{ background: 'linear-gradient(270deg, rgba(201,168,76,0.35) 0%, transparent 100%)' }} />
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(270deg, rgba(var(--accent-rgb),0.35) 0%, transparent 100%)' }} />
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {FIELDS.map(({ key, label, placeholder, type, prefix, suffix }) => (
             <div key={key} className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium tracking-wide" style={{ color: '#7a8799' }}>
+              <label className="text-xs font-medium tracking-wide" style={{ color: 'var(--text-muted)' }}>
                 {label}
               </label>
               <div className="relative">
                 {prefix && (
                   <span
                     className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm"
-                    style={{ color: '#3a4455', fontFamily: 'var(--font-dm-mono)' }}
+                    style={{ color: 'var(--text-subtle)' }}
                   >
                     {prefix}
                   </span>
@@ -64,7 +64,6 @@ export default function DebtForm() {
                   style={{
                     paddingLeft: prefix ? '1.875rem' : undefined,
                     paddingRight: suffix ? '2rem' : undefined,
-                    fontFamily: type === 'number' ? 'var(--font-dm-mono)' : undefined,
                   }}
                   placeholder={placeholder}
                   type={type}
@@ -77,7 +76,7 @@ export default function DebtForm() {
                 {suffix && (
                   <span
                     className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm"
-                    style={{ color: '#3a4455', fontFamily: 'var(--font-dm-mono)' }}
+                    style={{ color: 'var(--text-subtle)' }}
                   >
                     {suffix}
                   </span>
