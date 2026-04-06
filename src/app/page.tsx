@@ -26,14 +26,6 @@ export default function Home() {
                 Debt Payoff Simulator
               </p>
             </div>
-
-            <div className="hidden sm:flex items-center gap-2 text-xs" style={{ color: 'var(--text-subtle)' }}>
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ backgroundColor: 'var(--success)', boxShadow: '0 0 6px rgba(var(--accent-rgb),0.6)' }}
-              />
-              <span style={{ color: 'var(--text-muted)' }}>Strategy active</span>
-            </div>
           </div>
         </header>
 
